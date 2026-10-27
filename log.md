@@ -24,3 +24,6 @@ Practical reasons: Both easily fit the 16 GB T4 GPU using under 3 GB VRAM in FP1
      - **DataComp-1B CLIP:** Loaded via `open_clip.create_model_and_transforms('hf-hub:...')` with preprocessing transforms, tokenized via `open_clip.get_tokenizer()`, and encoded using `encode_image()` / `encode_text()`.
      - **SigLIP 2:** Loaded via Hugging Face `AutoProcessor` and `AutoModel` using `get_image_features()` / `get_text_features()`.
   3. Enforced strict evaluation parity: both pipelines receive the exact same PIL image inputs and candidate text prompts, and all feature vectors are L2-normalized ($v / \|v\|_2$) prior to cosine similarity calculation.
+
+- **Issue:** Calling `siglip_model.get_image_features()` and `get_text_features()` returned `BaseModelOutputWithPooling` instead of a raw tensor, causing an `AttributeError: 'BaseModelOutputWithPooling' object has no attribute 'norm'`.
+- **Fix:** Unpacked the pooled tensor via `.pooler_output` prior to applying L2 vector normalization.
