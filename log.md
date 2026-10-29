@@ -27,3 +27,8 @@ Practical reasons: Both easily fit the 16 GB T4 GPU using under 3 GB VRAM in FP1
 
 - **Issue:** Calling `siglip_model.get_image_features()` and `get_text_features()` returned `BaseModelOutputWithPooling` instead of a raw tensor, causing an `AttributeError: 'BaseModelOutputWithPooling' object has no attribute 'norm'`.
 - **Fix:** Unpacked the pooled tensor via `.pooler_output` prior to applying L2 vector normalization.
+
+
+##Oct 29- 
+- Decide on pair 2 between SDXL vs InstructPix2Pix or SDXL vs CosXL Edit
+- 
