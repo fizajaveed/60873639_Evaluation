@@ -52,3 +52,15 @@ Practical reasons: Both run in FP16 on the 16 GB T4 GPU when loaded one at a tim
   4. Re-checked all 10 masks visually: each now covers the top.
 
 - **Setup note:** CosXL Edit is a gated model, so the licence had to be accepted on Hugging Face and the notebook authenticated with a read token (`huggingface_hub.login()`) before download.
+
+
+## Oct 30-
+- Continue running the ipynb file
+
+- **Issue:** SDXL Inpainting redrew the masked top but left its colour almost unchanged (white and grey tops stayed white and grey) for both "red" and "green", although the person and background were preserved.
+- **Root Cause:** At `strength=0.99` the starting latent keeps a small trace of the original image, and colour – a low-frequency signal – survives that much noise. The short prompt ("a red top") also gave weak guidance.
+- **Resolution:**
+  1. Ran a side-by-side test on photo 1 with three settings: strength 0.99 + short prompt, strength 0.99 + full prompt, strength 1.0 + full prompt.
+  2. Chose **[strength 1.0 + full prompt]**, the only setting that turned the top **[red]**.
+  3. Updated Step 8 to `strength=[1.0]` and the prompt `"a photo of a person wearing a {colour} top"`, removed the earlier SDXL rows to avoid double-counting, and re-ran Steps 8–11.
+- **Note:** This is a silent failure – the default settings returned a clean, realistic image that simply ignored the requested colour, with no warning.
