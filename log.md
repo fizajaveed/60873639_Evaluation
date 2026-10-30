@@ -86,3 +86,17 @@ Why? Shap-E (OpenAI, 2023) replaces SDS/DreamFusion-style optimisation (2022), w
 Comparison: Which approach produces a 3D model that looks like the real product from every angle (photo match, view consistency, shape check), and which follows the description better (text match)? Both are also checked for usable, watertight meshes, and Shap-E is tested with a brand-name prompt ("a Louis Vuitton monogram handbag") for copying protected designs.
 
 Practical reasons: Both are small enough to run on the free 16 GB T4 GPU (peak about 3.7 GB for Shap-E and 3.1 GB for TripoSR) and both are MIT-licensed, so commercial use is allowed. TripoSR needed compatibility fixes to run with current libraries (newer PyTorch weight loading, a marching-cubes replacement and loading its DINO image encoder through transformers).
+
+## Oct 31-
+
+### Technical Note & Error Resolution: TripoSR Setup (library compatibility)
+- **Issue:** The official TripoSR code (VAST-AI-Research/TripoSR) does not run as-is on current Colab libraries.
+- **Root Cause:** Several dependencies have changed since TripoSR was released (2024): newer PyTorch refuses to load its checkpoint by default, its `torchmcubes` mesh extractor must be compiled, its background remover (`rembg`) is a heavy extra download, its image encoder uses older layer names, and the `torchao` add-on clashes with the installed `diffusers`.
+- **Resolution:**
+  1. Removed the `torchao` add-on before importing `diffusers`.
+  2. Patched `tsr/system.py` to load the checkpoint with `weights_only=False`.
+  3. Replaced `torchmcubes` with scikit-image's `marching_cubes` (same output layout), so nothing needs compiling.
+  4. Replaced `rembg` with a simple cut-out of the plain photo background, then centred each product on a grey square.
+  5. Loaded TripoSR's DINO ViT-B/16 image encoder through Hugging Face `transformers` (renaming its weights), and confirmed all other weights matched.
+
+- **Setup note:** Shap-E (`openai/shap-e`) and TripoSR (`stabilityai/TripoSR`) are public and MIT-licensed, so no login was needed.
