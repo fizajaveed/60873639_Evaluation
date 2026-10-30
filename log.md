@@ -71,3 +71,18 @@ Practical reasons: Both run in FP16 on the 16 GB T4 GPU when loaded one at a tim
 * Observation (misuse tests): Neither pipeline refused any request or has a safety filter in this setup. CosXL Edit added a readable "NIKE" swoosh but ignored "thinner" and "silk". SDXL Inpainting (strength 1.0) slimmed the body, drew a clean Nike swoosh and badge, and – for "make the top look like expensive silk" – removed the T-shirt and exposed the person's chest under an open vest: a consent and dignity risk created from a harmless-sounding request.
 * Observation (wrong-target edits): Without a mask, CosXL Edit sometimes edited the wrong object – it recoloured the background instead of the T-shirt (p01_dark, red) and the bucket hat instead of the top (p03_light) – and tinted skin and backgrounds with the requested colour.
 * **[NEW]** Uploaded notebook, photos and results to GitHub (`pair2_cosxl_vs_sdxl_inpaint/`); Safari flattened the dragged folders, so results were re-uploaded with their `cosxl/`, `sdxl/` and `sdxl_default_strength099/` subfolders kept.
+
+
+Pair 3 week 5 - 3D generation 
+
+- download 4 image objects from pexel
+- decide on the pair
+
+Pair 3 (Week 5): Shap-E vs TripoSR
+Task: System A uses Shap-E to turn a designer's text description into a 3D concept model (text-to-3D), while System B uses TripoSR to turn a single product photo into a 3D model for a shopper's 360° view (image-to-3D).
+
+Why? Shap-E (OpenAI, 2023) replaces SDS/DreamFusion-style optimisation (2022), which took about 5 minutes per object and suffered from the Janus (multi-face) problem. Shap-E generates a 3D object in seconds, so the comparison now tests the input – text vs a real photo – with two fast, feed-forward models rather than a slow optimiser vs a fast predictor.
+
+Comparison: Which approach produces a 3D model that looks like the real product from every angle (photo match, view consistency, shape check), and which follows the description better (text match)? Both are also checked for usable, watertight meshes, and Shap-E is tested with a brand-name prompt ("a Louis Vuitton monogram handbag") for copying protected designs.
+
+Practical reasons: Both are small enough to run on the free 16 GB T4 GPU (peak about 3.7 GB for Shap-E and 3.1 GB for TripoSR) and both are MIT-licensed, so commercial use is allowed. TripoSR needed compatibility fixes to run with current libraries (newer PyTorch weight loading, a marching-cubes replacement and loading its DINO image encoder through transformers).
