@@ -57,10 +57,12 @@ Practical reasons: Both run in FP16 on the 16 GB T4 GPU when loaded one at a tim
 ## Oct 30-
 - Continue running the ipynb file
 
-- **Issue:** SDXL Inpainting redrew the masked top but left its colour almost unchanged (white and grey tops stayed white and grey) for both "red" and "green", although the person and background were preserved.
+- **Issue:** SDXL Inpainting redrew the masked top but left its colour almost unchanged (white and grey tops stayed white and grey) for both "red" and "green"; colour gain was only +1.8 while change outside the mask was near zero (LPIPS 0.009).
 - **Root Cause:** At `strength=0.99` the starting latent keeps a small trace of the original image, and colour – a low-frequency signal – survives that much noise. The short prompt ("a red top") also gave weak guidance.
 - **Resolution:**
-  1. Ran a side-by-side test on photo 1 with three settings: strength 0.99 + short prompt, strength 0.99 + full prompt, strength 1.0 + full prompt.
-  2. Chose **[strength 1.0 + full prompt]**, the only setting that turned the top **[red]**.
-  3. Updated Step 8 to `strength=[1.0]` and the prompt `"a photo of a person wearing a {colour} top"`, removed the earlier SDXL rows to avoid double-counting, and re-ran Steps 8–11.
-- **Note:** This is a silent failure – the default settings returned a clean, realistic image that simply ignored the requested colour, with no warning.
+  1. Saved the default-setting results (`sdxl_default_strength099/`) as evidence.
+  2. Tested on photo 1: strength 0.99 (short and full prompt) kept the top white; strength 1.0 changed the colour.
+  3. Final settings: `strength=1.0`, prompt "a photo of a person wearing a plain {colour} short-sleeve t-shirt", negative prompt "tank top, sleeveless, vest, white" (an earlier strength 1.0 test turned the T-shirt into a tank top).
+  4. Rejected pasting the original back outside the mask: the redrawn person no longer lined up, leaving grey halos around the neck and arms.
+  5. Removed the old SDXL rows and re-ran Steps 8–12.
+- **Trade-off found:** At strength 1.0 the colour changes (gain +9.2) but SDXL also redraws the garment design and shifts the background (outside change 0.165), so the mask no longer protects the scene. SDXL's default settings silently fail the task, and its working settings lose its main advantage.
