@@ -1,0 +1,3 @@
+model,clip_after,clip_gain,lpips_outside,secs,peak_gb,blacked_out
+CosXL Edit,32.246,11.486,0.146,27.92,9.637,False
+SDXL Inpainting,22.576,1.815,0.009,18.778,9.624,False
