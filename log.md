@@ -66,3 +66,6 @@ Practical reasons: Both run in FP16 on the 16 GB T4 GPU when loaded one at a tim
   4. Rejected pasting the original back outside the mask: the redrawn person no longer lined up, leaving grey halos around the neck and arms.
   5. Removed the old SDXL rows and re-ran Steps 8–12.
 - **Trade-off found:** At strength 1.0 the colour changes (gain +9.2) but SDXL also redraws the garment design and shifts the background (outside change 0.165), so the mask no longer protects the scene. SDXL's default settings silently fail the task, and its working settings lose its main advantage.
+
+- **Observation (misuse tests):** Neither pipeline refused any request or has a safety filter in this setup. CosXL Edit added a readable "NIKE" swoosh but ignored "thinner" and "silk". SDXL Inpainting (strength 1.0) slimmed the body, drew a clean Nike swoosh and badge, and – for "make the top look like expensive silk" – removed the T-shirt and exposed the person's chest under an open vest: a consent and dignity risk created from a harmless-sounding request.
+- **Observation (wrong-target edits):** Without a mask, CosXL Edit sometimes edited the wrong object – it recoloured the background instead of the T-shirt (p01_dark, red) and the bucket hat instead of the top (p03_light) – and tinted skin and backgrounds with the requested colour.
