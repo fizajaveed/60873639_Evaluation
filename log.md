@@ -122,4 +122,4 @@ Practical reasons: Both are small enough to run on the free 16 GB T4 GPU (peak a
 - TripoSR invents the hidden side (the red clutch has a brown back).
 - Shap-E changes the product type (a clutch became a tote) and adds details (marks on the cap, black patches on the sneaker).
 
-**Decision:** TripoSR for System A, with a staff check of the cut-out and hidden sides.
+**Decision:** TripoSR (System B model) wins, with a staff check of the cut-out and hidden sides.
