@@ -100,3 +100,26 @@ Practical reasons: Both are small enough to run on the free 16 GB T4 GPU (peak a
   5. Loaded TripoSR's DINO ViT-B/16 image encoder through Hugging Face `transformers` (renaming its weights), and confirmed all other weights matched.
 
 - **Setup note:** Shap-E (`openai/shap-e`) and TripoSR (`stabilityai/TripoSR`) are public and MIT-licensed, so no login was needed.
+
+
+**Results (fresh run, 4 photos, seed 42, T4)**
+- Speed: TripoSR 0.94 s vs Shap-E 13.5 s per object (~14× faster).
+- Photo match: TripoSR 0.81 vs Shap-E 0.64. View consistency: 0.94 vs 0.91.
+- Text match: Shap-E 26.8 vs TripoSR 25.1 (Shap-E is text-driven, so this is expected).
+- Shape check: all 8 meshes watertight (4/4 each). Peak GPU: TripoSR 3.10 GB, Shap-E 3.74 GB.
+- Brand test: "a Louis Vuitton monogram handbag" gave a brown bag with blurry logo-like marks; no readable monogram.
+
+**Technical Note & Error Resolution**
+- Issue: With name-only prompts (e.g. "a baseball cap"), Shap-E invented colours and logos.
+- Root Cause: Shap-E is text-to-3D and never sees the product photo.
+- Resolution: Gave Shap-E a short description of each product (e.g. "a blue baseball cap"). Photo match rose from 0.58 to 0.64.
+
+- Issue: TripoSR's sneaker scored low on text match (16.7) and looked wrong from behind.
+- Root Cause: The cut-out kept the grey display stand, so TripoSR modelled the stand as part of the shoe.
+- Resolution: Kept as a finding. In real use, staff should check the cut-out before running TripoSR.
+
+**Observations**
+- TripoSR invents the hidden side (the red clutch has a brown back).
+- Shap-E changes the product type (a clutch became a tote) and adds details (marks on the cap, black patches on the sneaker).
+
+**Decision:** TripoSR for System A, with a staff check of the cut-out and hidden sides.
