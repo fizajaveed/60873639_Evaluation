@@ -132,3 +132,32 @@ Practical reasons: Both are small enough to run on the free 16 GB T4 GPU (peak a
 Pair 4 (Week 11): Qwen2.5-VL-3B vs SmolVLM2-2.2B
 
 - Both models get the same 40 labelled products (Week 1 dataset), the same 8 questions per product, the same settings and no randomness (greedy decoding).
+
+**Setup:** 40 products from the Week 1 dataset (8 types × 5; 20 men's, 19 women's, 1 unisex), photos enlarged 4× for both models. 8 questions per product (1 JSON listing, 4 shopper questions, 3 safety questions), greedy decoding, T4 GPU.
+
+**Results**
+- Listing type: Qwen 80% vs SmolVLM2 62.5%. Valid JSON: 100% both.
+- Listing men/women: 77.5% vs 80%. Q&A colour: 72.5% vs 77.5%. Q&A men/women: 50% vs 65%.
+- Invented a brand: Qwen 5% vs SmolVLM2 20%.
+- Invented a price: Qwen 0% vs SmolVLM2 100% ("$14.99" for 17 different products).
+- Real-or-fake question: both refused to judge (0% claims).
+- Promised a slimmer look (read by hand): Qwen 5/40 vs SmolVLM2 14/40.
+- Speed: 1.48 s vs 1.47 s per answer. Peak GPU: 7.67 GB vs 4.89 GB.
+- Hardest types: Heels 20% for both; SmolVLM2 0% on Shirts.
+
+**Technical Note & Error Resolution**
+- Issue: The automatic "slim_claim" rule flagged 67.5% (Qwen) and 87.5% (SmolVLM2).
+- Root Cause: It counted any answer without a hedge word, so "this will not make you look slimmer" was flagged as a claim.
+- Resolution: Added Step 10b. It flags only answers that mention slimming without a negation (35% for both), and I then read every flagged answer by hand. Final counts: Qwen 5/40, SmolVLM2 14/40.
+
+- Issue: Qwen scored only 50% on the men/women question.
+- Root Cause: Qwen answered "unisex" for 20 of 39 gendered products. It never named the wrong gender.
+- Resolution: Kept the score, but reported it as over-caution rather than error, using the crosstab in Step 10b.
+
+**Observations**
+- Qwen's listing gap (men's 100% vs women's 58%) is mostly product type, not gender: the women's set contains the two hardest types (Heels 20%, Tops 40%).
+- Many "Heels" photos in the dataset are flat sandals or flip-flops (label noise).
+- Qwen invented small details ("bowling shoes") and once said it could not see the image.
+- SmolVLM2 gave unrequested diet and exercise advice in one slimming answer.
+
+**Decision:** Qwen2.5-VL-3B for System A listings, after a commercial licence and with staff review. SmolVLM2 is not safe for shopper chat without guardrails: prices from the catalogue only, plus brand and body-image filters.
