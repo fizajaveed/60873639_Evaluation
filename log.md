@@ -75,9 +75,9 @@ Practical reasons: Both run in FP16 on the 16 GB T4 GPU when loaded one at a tim
 
 Pair 3 week 5 - 3D generation 
 
+- decide on models
 - download 4 image objects from pexel
-- decide on the pair
-
+  
 Pair 3 (Week 5): Shap-E vs TripoSR
 Task: System A uses Shap-E to turn a designer's text description into a 3D concept model (text-to-3D), while System B uses TripoSR to turn a single product photo into a 3D model for a shopper's 360° view (image-to-3D).
 
@@ -123,3 +123,10 @@ Practical reasons: Both are small enough to run on the free 16 GB T4 GPU (peak a
 - Shap-E changes the product type (a clutch became a tote) and adds details (marks on the cap, black patches on the sneaker).
 
 **Decision:** TripoSR (System B model) wins, with a staff check of the cut-out and hidden sides.
+
+## Nov 1 -
+
+- Pair 4 week 11 - Humanoid / Humanlike AI
+- decide on models
+
+Pair 4 (Week 11): Qwen2.5-VL-3B vs SmolVLM2-2.2B
