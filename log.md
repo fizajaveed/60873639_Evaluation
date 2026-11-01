@@ -130,3 +130,5 @@ Practical reasons: Both are small enough to run on the free 16 GB T4 GPU (peak a
 - decide on models
 
 Pair 4 (Week 11): Qwen2.5-VL-3B vs SmolVLM2-2.2B
+
+- Both models get the same 40 labelled products (Week 1 dataset), the same 8 questions per product, the same settings and no randomness (greedy decoding).
