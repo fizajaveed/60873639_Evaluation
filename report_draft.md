@@ -31,5 +31,33 @@ This evaluation makes four contributions:
 3.	Fairness and misuse testing: Results split by skin tone, product gender and product type, plus fixed misuse prompts for brands, body image fabric and authenticity.
 4.	Deployment recommendations: A verdict and control set for each pair, combined into one end to end workflow per ssytem.
 
+## Evaluation Framework
+The framework turns the assignment's evaluation requirements into seven categories, each with measurable evidence. The same categories are applied to every pair.
 
+
+| Category | Question it answers | Evidence used |
+| :--- | :--- | :--- |
+| Appropriateness | Is the technique a good, current fit for the task? | Technique analysis, lecture link, publication date |
+| Technical performance | How accurate, faithful and efficient is it? | Task metrics on the shared test set; seconds per output; peak GPU memory |
+| Business performance | What does it save or enable? | Speed and cost per output; quality good enough to publish; manual work avoided |
+| Competitiveness | How does it compare with its pair and a baseline? | Head-to-head results on identical inputs; the original photo as a baseline |
+| User trust | Would staff and shoppers trust the output? | Inspection of outputs; honesty and tone of answers |
+| Governance, safety and ethics | Is it licensed, safe and hard to misuse? | Licence audit; fixed misuse prompts; safety-filter behaviour |
+| Fairness | Is quality even across groups? | Results split by skin tone, product gender or product type |
+
+User trust was judged by inspecting every output against what a staff member or shopper would need. Published benchmarks were used only as a background, every result in this report comes from my own experiments.
+
+## Metrics
+When an output requires comparison with text, an independent evaluation model, LAION CLIP, is utilised. The ViT-B/32 architecture computes a CLIP score to ensure that no evaluated model assesses its own output. This approach prevents any evaluated model from scoring its own work
+
+Retrieval is measured using Recall@k (the proportion of queries for which the correct product appears in the top k results). Change to an edited garment is measured using LPIPS (a learned perceptual image patch similarity measure, where lower is better). For 3D models we use photo match (the similarity of the best rendered view to the real product photo as judged by the judge model) and view consistency (the similarity of adjacent views in a 20-view spin). Vision-language answers are automatically scored against the dataset labels. Efficiency is reported as seconds per output after a warm-up run and peak GPU memory is reported.<img width="468" height="110" alt="image" src="https://github.com/user-attachments/assets/8e6a5c2c-15c0-4ce9-a921-7e132579c4b9" />
+
+## Experimental Settings
+All experiments were conducted on a free Google Colab NVIDIA T4 GPU (16 GB) using a random seed of 42. Both models within each pair received identical inputs and their respective recommended default settings; the specific settings for each pair are provided in Appendix A. For each pair, a single Colab notebook executed the workflow sequentially and saved the resulting tables and figures (Appendix B).
+
+## Fairness Group
+Fairness is assessed by splitting the results into groups: product gender in Pairs 1 and 4 (Men 53/Women 44; Men 20 and Women 19), skin tone in Pair 2 (4 dark, 2 medium, 4 light) and product type in Pair 3. Groups with less than around 20 items are treated as indicative only.
+
+## Models and Experimental Setup
+This section characterises each model and outlines the testing procedures for each pair. The results are presented in Section 4.
 
