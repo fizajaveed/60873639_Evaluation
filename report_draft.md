@@ -64,6 +64,7 @@ This section characterises each model and outlines the testing procedures for ea
 ## 5 Nov
 
 Pair 1 (Week 1): DataComp CLIP vs SigLIP2
+
 Both models are connectionist, discriminative foundation models used in a zero-shot fashion (one large pre-trained model being re-used for a new task without any extra training at all) representing the Week 1 shift from task specific models to foundation models. They are two different approaches to a better foundation model. DataComp CLIP is the original CLIP method but trained on better filtered data. SigLIP 2 is the same as CLIP but with a different training objective.
 
 The two models are different in what they've improved. For a batch of N image/text pairs with similarity sᵢⱼ,  CLIP has each image competing against every text (softmax), whereas SigLIP makes a binary judgement for each pair 
@@ -71,4 +72,16 @@ The two models are different in what they've improved. For a batch of N image/te
 DataComp CLIP uses the left hand loss as is, its improvement comes from the training data which has been filtered for image-text agreement.
 
 Setup. DataComp CLIP (ViT-B/16, DataComp.XL checkpoint) was loaded with the OpenCLIP library and SigLIP 2 with Hugging Face Transformers, both using fp16. Each model labelled 100 test photos by picking the closest of five prompts, such as “a product photo of handbags.” They also labelled 100 challenging photos from five similar categories: T-shirts, shirts, tops, casual shoes, and sports shoes. For search, we used each product's name as a query and measured Recall@1 and Recall@5. All text was lowercased, and for SigLIP 2, padded to the fixed 64-token length used during its training 
+
+Result for pair 1
+
+On the five easy types both models are at the ceiling so the hard set is what separates them. SigLIP 2 is 7 points better with its errors being mostly tops being labelled as t-shirts (6) and sports shoes being labelled as casual (4). DataComp CLIP has 7 of its 20 casual shoes incorrectly labelled as sports shoes and has 11 errors in total with all three upper body types (Figure 3). In search the order is reversed with DataComp CLIP coming first in 54 of the 100 searches (47 for SigLIP 2) and both models placing it in the top 5 84 times. DataComp CLIP is also about 1.8x faster per image. SigLIP 2 tags 10k images in under 2 minutes on a single T4. By hand it took about 50 seconds per image when we timed it on 20 test images so the same job would have taken about 139 staff hours.
+
+Both models are finding the women's products less often (3 point gap for DataComp CLIP, 7 point gap for SigLIP 2). With around 50 products in each group that's two or three photos so could easily be noise, but it should be watched. Labelling accuracy shows no meaningful gap.
+
+The big problem was a silent failure. With the library's default text settings (dynamic padding, mixed case text) SigLIP 2 only got 19% of the photos correct (chance level for 5 classes) and its search scores were essentially zero. Once the text was lowercased and padded to the fixed 64 token length used in training the same model got 99%. There was absolutely nothing in the output to suggest that there was a problem. On licensing SigLIP 2 is Apache 2.0 which is fine for commercial use, DataComp CLIP's model card is rather more restrictive in that it effectively excludes deployed use.
+
+Verdict. Tagging is done with SigLIP 2 (System A) where its 7 point advantage on lookalikes is the most important factor. Search is done with DataComp CLIP (System B) which finds the exact product first more often, is 1.8x faster and is more even across genders once its licence position is established. Controls: automated text format test for SigLIP 2, staff review of low confidence tags and a monthly gender gap check.
+
+
 
