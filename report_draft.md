@@ -50,7 +50,7 @@ User trust was judged by inspecting every output against what a staff member or 
 ## Metrics
 When an output requires comparison with text, an independent evaluation model, LAION CLIP, is utilised. The ViT-B/32 architecture computes a CLIP score to ensure that no evaluated model assesses its own output. This approach prevents any evaluated model from scoring its own work
 
-Retrieval is measured using Recall@k (the proportion of queries for which the correct product appears in the top k results). Change to an edited garment is measured using LPIPS (a learned perceptual image patch similarity measure, where lower is better). For 3D models we use photo match (the similarity of the best rendered view to the real product photo as judged by the judge model) and view consistency (the similarity of adjacent views in a 20-view spin). Vision-language answers are automatically scored against the dataset labels. Efficiency is reported as seconds per output after a warm-up run and peak GPU memory is reported.<img width="468" height="110" alt="image" src="https://github.com/user-attachments/assets/8e6a5c2c-15c0-4ce9-a921-7e132579c4b9" />
+Retrieval is measured using Recall@k (the proportion of queries for which the correct product appears in the top k results). Change to an edited garment is measured using LPIPS (a learned perceptual image patch similarity measure, where lower is better). For 3D models we use photo match (the similarity of the best rendered view to the real product photo as judged by the judge model) and view consistency (the similarity of adjacent views in a 20-view spin). Vision-language answers are automatically scored against the dataset labels. Efficiency is reported as seconds per output after a warm-up run and peak GPU memory is reported.
 
 ## Experimental Settings
 All experiments were conducted on a free Google Colab NVIDIA T4 GPU (16 GB) using a random seed of 42. Both models within each pair received identical inputs and their respective recommended default settings; the specific settings for each pair are provided in Appendix A. For each pair, a single Colab notebook executed the workflow sequentially and saved the resulting tables and figures (Appendix B).
@@ -60,4 +60,15 @@ Fairness is assessed by splitting the results into groups: product gender in Pai
 
 ## Models and Experimental Setup
 This section characterises each model and outlines the testing procedures for each pair. The results are presented in Section 4.
+
+## 5 Nov
+
+Pair 1 (Week 1): DataComp CLIP vs SigLIP2
+Both models are connectionist, discriminative foundation models used in a zero-shot fashion (one large pre-trained model being re-used for a new task without any extra training at all) representing the Week 1 shift from task specific models to foundation models. They are two different approaches to a better foundation model. DataComp CLIP is the original CLIP method but trained on better filtered data. SigLIP 2 is the same as CLIP but with a different training objective.
+
+The two models are different in what they've improved. For a batch of N image/text pairs with similarity sᵢⱼ,  CLIP has each image competing against every text (softmax), whereas SigLIP makes a binary judgement for each pair 
+
+DataComp CLIP uses the left hand loss as is, its improvement comes from the training data which has been filtered for image-text agreement.
+
+Setup. DataComp CLIP (ViT-B/16, DataComp.XL checkpoint) was loaded with the OpenCLIP library and SigLIP 2 with Hugging Face Transformers, both using fp16. Each model labelled 100 test photos by picking the closest of five prompts, such as “a product photo of handbags.” They also labelled 100 challenging photos from five similar categories: T-shirts, shirts, tops, casual shoes, and sports shoes. For search, we used each product's name as a query and measured Recall@1 and Recall@5. All text was lowercased, and for SigLIP 2, padded to the fixed 64-token length used during its training 
 
