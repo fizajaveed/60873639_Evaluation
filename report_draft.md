@@ -197,3 +197,8 @@ The results are indicative rather than definitive. The test sets were very small
 The data were proxies. Pairs 1 and 4 used small catalogue thumbnails, while Pair 3 included only four products. In Pair 4, the men's and women's products were different types, which confounds the gender comparison. As allowed, we assessed user trust by examining the outputs instead of using external participants.
 Future work should be to re-run the tests on ThreadNest's actual catalogue at full resolution with multiple seeds, run a user study with both staff and shoppers, fine-tune SigLIP 2 and Qwen2.5-VL on ThreadNest data and test the multi-angle photos with TripoSR.
 
+## Conclusions
+
+This evaluation compared 8 state-of-the-art AI models in four pairs for ThreadNest's Product Photo Studio and Shopper Style Assistant. ThreadNest should be using SigLIP 2 for tagging and DataComp CLIP for search, SDXL Inpainting, TripoSR and (once licensed) Qwen2.5-VL-3B. That gives you a complete end to end workflow from a new product photo to a published searchable listing and all of it runs fast and cheap on a single modest GPU.
+The more significant outcome is that accuracy on its own would have resulted in a very poor choice. A silent preprocessing bug, an identity swap, copied logos and a restrictive licence were all decisive in at least one of the pairs. A Chief AI Officer should therefore be using these models with human review, labelling, fairness monitoring and licence checks all baked in from the outset.
+
