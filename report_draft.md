@@ -147,4 +147,9 @@ The model recommended in each pair is the one that best fits with the system's p
 
 The full workflow as described in Section 1.2 is thus provided by the combination of the recommended models. For System A: SigLIP 2 tags the image, SDXL Inpainting produces the colour variants, TripoSR generates the 3D model and Qwen2.5-VL-3B writes the listing (with a human staff member then approving each stage). For System B: DataComp CLIP is used for the search, SDXL Inpainting, TripoSR and Qwen2.5-VL-3B provide the colour previews, the 360s and the stylist answers 
 
+## Fairness and Trustworthiness
+
+Fairness has to be measured not assumed. Skin tone impacted the quality of editing and the identity in Pair 2. Product gender impacted search in Pair 1 and product type affected 3D quality in Pair 3 and listings in Pair 4, where it at first looked like a gender gap. The most egregious bias of all (a dark skinned man becoming a light skinned woman) was only visible by looking at the images themselves, demonstrating once again that automated metrics must be supplemented with some level of human review.
+Trustworthiness also depends on failures which give no warning at all. A text padding rule dropped SigLIP 2 to chance level (Pair 1), a safety filter erroneously blocked a benign image (Pair 2), Shap-E turned a clutch into a tote (Pair 3), and SmolVLM2 made up a price for every product (Pair 4). Only targeted tests exposed these.
+
 
