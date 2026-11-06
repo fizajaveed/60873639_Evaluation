@@ -102,3 +102,19 @@ Neither model refused any request, and neither pipeline includes a safety filter
 
 Verdict. Neither model is suitable for shopper-facing product photographs. CosXL Edit may be used for rapid internal colour mock-ups once a commercial licence is obtained, provided staff review each image for incorrect targets and colour leaks. For shopper colour previews, a non-generative colour shift within the clothing mask is preferable, as it modifies only the garment's colour. Recommended controls include blocking brand and body-shape prompts, labelling edited photos as AI-generated, and verifying results across various skin tones.
 
+Pair 3 (Week 5): Shap-E vs TripoSR
+
+Shap-E initially trains an encoder to convert each 3D asset into the weights of an implicit function, which can subsequently be rendered as a NeRF or exported as a textured mesh. a transformer diffusion model is trained to generate these weights from text by recovering the clean weights  from a noisy version conditioned on the text embedding 
+
+Both models therefore make use of a prior learned from large 3D datasets – the extra information that the Week 5 lecture points to as being essential to go from very few images to a 3D reconstruction. Shap-E applies this prior to text alone and so has to invent all the details of the object. TripoSR applies the prior to a real photo in a single forward pass.
+
+Setup. Four Pexels product photos (baseball cap, leather boots, red handbag, white sneaker) were used. TripoSR got each of the photos; Shap-E got a brief description of the product (e.g. "a blue baseball cap") as it would just invent the colour and logo on its own from the product name. Shap-E ran for 64 steps with guidance 15. Each result was rendered as 20 views of the object around it at 256px and each mesh was checked to be watertight. The judge CLIP model scored on text match, photo match (best view against the real photo) and view consistency (similarity of adjacent views). There was one additional Shap-E run using the prompt "a Louis Vuitton monogram handbag" to test brand copying.
+
+Result for pair 3
+
+TripoSR is around 14x faster, much closer to the real product (photo match 0.81 vs 0.64), slightly more stable across views and uses less GPU memory. All eight meshes were watertight (average of around 82k faces for Shap-E and 90k for TripoSR) and were all ready to go in a 3D viewer. Shap-E does a slightly better job at matching the words as it's generating from the words, but it never actually sees the product so the shapes and detail are all invented. Descriptive prompts improved its photo match from 0.58 (just the product name) to 0.64, still well below TripoSR.
+Quality is very much product dependent. TripoSR is great with the cap and the boots, has to guess at the side it can't see so the flat clutch gets a faked back and as the cut-out actually keeps the display stand the stand becomes part of the shoe. Shap-E fails in a different way entirely. It's working from text only so it changes the product type and adds all sorts of stuff that wasn't there to begin with.
+The brand test still shows a governance risk (though a much weaker one than we'd anticipated) from the text alone. Shap-E has produced a brown handbag with rather blurry pale markings which look like a logo. There's no monogram that can be read at all, but it does replicate the general look of the brand and nothing in the pipeline is going to filter out brand names.
+
+Vedict. TripoSR for the 360s (staff check every cut-out and 3D model prior to publishing, multi angle photos for flat/stand mounted items). Shap-E only for very rough internal concepts (with brand names blocked).
+
