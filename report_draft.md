@@ -182,3 +182,27 @@ E-commerce fashion vendors release several items, everything requiring a tag, im
 Many of these tasks can be automated using generative and multimodal AI. Edited product photographs cand descriptions that misinterpret a garment, model, or a brand pose a risk to consumer law, trademarks and reputation. Choosing a model involves more than just an accuracy score.
 In this assignment I act as the Chief AI Officer of ThreadNest, a fictional Australian online store, and evaluate state-of-the-art models for the two AI systems. The organisation and its business figures are a scenario created for this evaluation, not real company data.
 
+## Problem Formulation
+ThreadNest runs two AI systems with different users and priorities.
+
+| | System A – Product Photo Studio | System B – Shopper Style Assistant |
+| :--- | :--- | :--- |
+| Users | ThreadNest staff (catalogue, design, marketing) | Online shoppers |
+| Jobs | Tag photos, recolour products, build 3D models, write listings | Search by description, see colour varieties, spin products 360°, ask a stylist |
+| Priority | Quality and control, with a person approving every output | Speed, low cost per request and safety on a public channel |
+
+For each lecture week used, two comparable models that perform the same kind of task are selected. Each model is given a model with similar inputs, so any difference in output is due to the model, not the test.
+
+| Pair | Week | Lecture Topic | System A model | System B model | ThreadNest Task |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | 1 | AI landscape and paradigms | DataComp CLIP | SigLIP 2 | Tag product photos, text search |
+| 2 | 2 | Image editing 1 | CosXL Edit | SDXL Inpainting | Recolour clothes in photos |
+| 3 | 5 | 3D generation 2 | Shap - E | TripoSR | Text or photo to 3D model |
+| 4 | 11 | Humanoid / Human-like AI | Qwen2.5-VL-3B | SmolVLM2-2.2B | Product listings, stylist chat |
+
+The evaluation covers four pairs. They were chosen to span 4 different lecture topics – discriminative, image editing, 3D and multimodal models and to form one complete workflow for each system:
+
+1.	System A (Staff) – a new product photo is tagged (Pair 1), recoloured in varieties (Pair 2), turned into a 3D model (Pair 3) and given a listing (Pair 4), a staff member approves each output before it is published.
+2.	System B (Shoppers) - a shopper’s text search finds the product (Pair 1), a colour preview shows other variants (Pair 2), a 360 view lets them spin it (Pair 3) and a stylist chat answers their questons (Pair 4).
+
+
