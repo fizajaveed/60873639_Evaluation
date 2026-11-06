@@ -191,18 +191,9 @@ ThreadNest runs two AI systems with different users and priorities.
 | Jobs | Tag photos, recolour products, build 3D models, write listings | Search by description, see colour varieties, spin products 360°, ask a stylist |
 | Priority | Quality and control, with a person approving every output | Speed, low cost per request and safety on a public channel |
 
-For each lecture week used, two comparable models that perform the same kind of task are selected. Each model is given a model with similar inputs, so any difference in output is due to the model, not the test.
+## Limitations
 
-| Pair | Week | Lecture Topic | System A model | System B model | ThreadNest Task |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | 1 | AI landscape and paradigms | DataComp CLIP | SigLIP 2 | Tag product photos, text search |
-| 2 | 2 | Image editing 1 | CosXL Edit | SDXL Inpainting | Recolour clothes in photos |
-| 3 | 5 | 3D generation 2 | Shap - E | TripoSR | Text or photo to 3D model |
-| 4 | 11 | Humanoid / Human-like AI | Qwen2.5-VL-3B | SmolVLM2-2.2B | Product listings, stylist chat |
-
-The evaluation covers four pairs. They were chosen to span 4 different lecture topics – discriminative, image editing, 3D and multimodal models and to form one complete workflow for each system:
-
-1.	System A (Staff) – a new product photo is tagged (Pair 1), recoloured in varieties (Pair 2), turned into a 3D model (Pair 3) and given a listing (Pair 4), a staff member approves each output before it is published.
-2.	System B (Shoppers) - a shopper’s text search finds the product (Pair 1), a colour preview shows other variants (Pair 2), a 360 view lets them spin it (Pair 3) and a stylist chat answers their questons (Pair 4).
-
+The results are indicative rather than definitive. The test sets were very small (4 to 200 items per pair) and in some of the fairness groups there were only 2 or 3 photos so a few point gap could just be noise. All models were run with their recommended default settings and a single seed (tuned settings or multiple seeds could have altered some of the results). A number of the scores are from a CLIP judge who may well be subject to the very biases we're trying to measure.
+The data were proxies. Pairs 1 and 4 used small catalogue thumbnails, while Pair 3 included only four products. In Pair 4, the men's and women's products were different types, which confounds the gender comparison. As allowed, we assessed user trust by examining the outputs instead of using external participants.
+Future work should be to re-run the tests on ThreadNest's actual catalogue at full resolution with multiple seeds, run a user study with both staff and shoppers, fine-tune SigLIP 2 and Qwen2.5-VL on ThreadNest data and test the multi-angle photos with TripoSR.
 
