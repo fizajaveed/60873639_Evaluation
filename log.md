@@ -163,37 +163,5 @@ Pair 4 (Week 11): Qwen2.5-VL-3B vs SmolVLM2-2.2B
 **Decision:** Qwen2.5-VL-3B for System A listings, after a commercial licence and with staff review. SmolVLM2 is not safe for shopper chat without guardrails: prices from the catalogue only, plus brand and body-image filters.
 
 
-## Nov 3 -
-Read through pair 1 papers and resources again
-
-Resource	
-- DataComp CLIP checkpoint (ViT-B/16, DataComp.XL)	
-https://huggingface.co/laion/CLIP-ViT-B-16-DataComp.XL-s13B-b90K
-- SigLIP 2 checkpoint (base, patch16, 224)	
-https://huggingface.co/google/siglip2-base-patch16-224
-
-Papers
-- Gadre et al. (2023), DataComp: In search of the next generation of multimodal datasets
-  https://arxiv.org/abs/2304.14108
-- Tschannen et al. (2025), SigLIP 2
-  https://arxiv.org/abs/2502.14786
-- Radford et al. (2021), CLIP (the original method DataComp CLIP keeps)
-  https://arxiv.org/abs/2103.00020
-- Zhai et al. (2023), SigLIP, the original sigmoid loss (optional)
-  https://arxiv.org/abs/2303.15343
-
-Dataset
-- Aggarwal (2019), Fashion Product Images (Small), Kaggle
-  https://www.kaggle.com/datasets/paramaggarwal/fashion-product-images-small
-- Hugging Face copy used in your notebook
-  https://huggingface.co/datasets/ashraq/fashion-product-images-small
-
-Tools and Code
-- OpenCLIP (loads DataComp CLIP)
-  https://github.com/mlfoundations/open_clip
-- Hugging Face Transformers: SigLIP 2 docs (padding and lowercase notes)
-  https://huggingface.co/docs/transformers/model_doc/siglip2
-- Google Colab (T4 GPU)
-  https://colab.research.google.com
-
-  Report writing and slides for pair 1 done
+## Nov 3 - Nov 6
+Prepare report and slides
