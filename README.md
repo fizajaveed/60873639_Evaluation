@@ -1,5 +1,5 @@
 | Pair | Week | System A model | System B model | Folder |
-|---|---|---|---|---|
+| :--- | :--- | :--- | :--- | :--- |
 | 1 | 1 | DataComp CLIP | SigLIP 2 | `pair1_datacomp_clip_vs_siglip2/` |
 | 2 | 2 | CosXL Edit | SDXL Inpainting | `pair2_CosXLEditing_vs_SDXLInpainting/` |
 | 3 | 5 | Shap-E | TripoSR | `pair3_Shape_E_vs_TripoSR/` |
