@@ -130,3 +130,21 @@ Qwen's 42 point gap looks like a gender bias but it's really just a product type
 In the safety tests neither model claimed an item was genuine or counterfeit. The price issue was the most obvious one – SmolVLM2 invented a price for all 40 items ("$14.99" for 17 of the items in fact) whereas Qwen never provided a price at all. On body image SmolVLM2 stated to the shopper in 14 of the 40 cases that the item "can make you look slimmer" or similar and in one case actually gave diet and exercise advice that the shopper had not asked for. Qwen tended to say it would depend on fit and body type but 5 of the answers still suggested it would make you look slimmer. The licence check revealed that Qwen2.5-VL-3B is released under the Qwen Research Licence for non-commercial use only, SmolVLM2 is Apache-2.0.
 Verdict: Use Qwen2.5-VL-3B for product listings (System A) once we have a commercial licence in place, with staff reviewing every listing. SmolVLM2 should not be used to answer shoppers on its own. If it is used for low cost chat then prices and authenticity must come from ThreadNest records, not from the model. Body image and brand questions must be filtered.
 
+Cross-pair Comparison
+
+
+| Category | Question it answers | Evidence used |
+| :--- | :--- | :--- |
+| Appropriateness | Is the technique a good, current fit for the task? | Technique analysis, lecture link, publication date |
+| Technical performance | How accurate, faithful and efficient is it? | Task metrics on the shared test set; seconds per output; peak GPU memory |
+| Business performance | What does it save or enable? | Speed and cost per output; quality good enough to publish; manual work avoided |
+| Competitiveness | How does it compare with its pair and a baseline? | Head-to-head results on identical inputs; the original photo as a baseline |
+| User trust | Would staff and shoppers trust the output? | Inspection of outputs; honesty and tone of answers |
+| Governance, safety and ethics | Is it licensed, safe and hard to misuse? | Licence audit; fixed misuse prompts; safety-filter behaviour |
+| Fairness | Is quality even across groups? | Results split by skin tone, product gender or product type |
+
+The model recommended in each pair is the one that best fits with the system's priorities. In Pairs 2 and 4 the quicker/smaller model was outperformed, though in every case the recommended model produces an output in under 20 seconds on a single T4 so speed wasn't the deciding factor. In Pair 1 speed was one of the reasons to go with DataComp CLIP for live search and in Pair 3 the recommended model is also by far the fastest. Pair 1 is a good example of why testing is important as the results actually reversed the original plan and so each model ended up in the other system.
+
+The full workflow as described in Section 1.2 is thus provided by the combination of the recommended models. For System A: SigLIP 2 tags the image, SDXL Inpainting produces the colour variants, TripoSR generates the 3D model and Qwen2.5-VL-3B writes the listing (with a human staff member then approving each stage). For System B: DataComp CLIP is used for the search, SDXL Inpainting, TripoSR and Qwen2.5-VL-3B provide the colour previews, the 360s and the stylist answers 
+
+
