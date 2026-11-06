@@ -176,3 +176,9 @@ Business value. At an on-demand cloud price of circa $0.35 per T4 GPU-hour, a Co
 
 Social and environmental effects. Fewer reshoots means less sample shipping, less travel and less studio time and the models we test run on a single low power GPU. On the flip side of course AI edited images can be very problematic in terms of misrepresenting who the model is (i.e. who is wearing the clothes, what the fabric is etc) or even undressing a real model so labelling and consent are part of the business case.
 
+## Introduction
+
+E-commerce fashion vendors release several items, everything requiring a tag, images in every colour, a description, and more frequently a 360° view. Photoshoots for each variant are slow and costly, hand-tagging is error prone, and keyword search fails when shoppers describe items in their own words.
+Many of these tasks can be automated using generative and multimodal AI. Edited product photographs cand descriptions that misinterpret a garment, model, or a brand pose a risk to consumer law, trademarks and reputation. Choosing a model involves more than just an accuracy score.
+In this assignment I act as the Chief AI Officer of ThreadNest, a fictional Australian online store, and evaluate state-of-the-art models for the two AI systems. The organisation and its business figures are a scenario created for this evaluation, not real company data.
+
