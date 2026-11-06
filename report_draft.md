@@ -154,6 +154,8 @@ Trustworthiness also depends on failures which give no warning at all. A text pa
 
 ## Deployment plan with a named owner and a target value for every control
 
+These controls are in line with Australia's AI Ethics Principles (in particular the principles of fairness, reliability and safety, transparency and accountability) (Department of Industry, Science and Resources, 2019). The requirement to label AI-generated and AI-edited images is also in accordance with the transparency requirements of Article 50 of the EU AI Act (European Union, 2024) which will come into effect on 2 August 2026. In combination with the prices taken from the catalogue records, these controls will ensure that the product images and claims are accurate in line with Australian Consumer Law.
+
 | Stage | Control | Owner | Target |
 | :--- | :--- | :--- | :--- |
 | Before launch | Commercial licence for every model | Head of Legal | 100% of models licensed before go-live |
@@ -165,3 +167,12 @@ Trustworthiness also depends on failures which give no warning at all. A text pa
 | After launch | Monthly fairness and accuracy check | AI Quality Lead | Gaps stay ≤ 5 points; accuracy within 2 points of this evaluation |
 | After launch | Shopper feedback button on AI content | Customer Experience Lead | Every flag answered within 48 hours |
 | After launch | Incident log and rollback plan | Chief AI Officer | Rollback within 24 hours of a confirmed incident |
+
+Intellectual property. No model has been tested in isolation to protect a trademark. Both the editors produced Nike logos (Pair 2), Shap-E produced an image of a Louis Vuitton bag (Pair 3) and both of the vision-language models came up with brand names (Pair 4). The courts are now looking at these outputs as a trade mark issue. In Getty Images v Stability AI (High Court of England and Wales, 4 November 2025) there was a finding of limited trade mark infringement in respect of earlier versions of Stable Diffusion which had produced images which contained the Getty watermark (Mayer Brown 2025). Brand marks in the published outputs are therefore very much an exposure.
+
+Licensing: Qwen2.5-VL-3B and CosXL Edit are non-commercial. SDXL Inpainting has OpenRAIL usage restrictions. The DataComp CLIP model card considers any deployed use to be out of scope. SigLIP 2, SmolVLM2, Shap-E and TripoSR all have permissive Apache-2.0 or MIT licences. A model that is technically the best may still be unusable without a commercial licence.
+
+Business value. At an on-demand cloud price of circa $0.35 per T4 GPU-hour, a CosXL edit (27.9s) comes in at circa $0.003 of compute and tagging 10,000 photos with SigLIP 2 (9.9ms each) comes in at circa $0.01. That's in stark contrast to the 139 staff hours it would have taken to do it by hand. The real value is in the work you avoid (reshoots, hand tagging, 3D modelling, listing writing etc) but as the outputs still need to be reviewed the actual gain is in much faster and cheaper first drafts.
+
+Social and environmental effects. Fewer reshoots means less sample shipping, less travel and less studio time and the models we test run on a single low power GPU. On the flip side of course AI edited images can be very problematic in terms of misrepresenting who the model is (i.e. who is wearing the clothes, what the fabric is etc) or even undressing a real model so labelling and consent are part of the business case.
+
