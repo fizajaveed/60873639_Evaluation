@@ -1,3 +1,5 @@
+## Model Pairs
+
 | Pair | Week | System A model | System B model | Folder |
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | 1 | DataComp CLIP | SigLIP 2 | `pair1_datacomp_clip_vs_siglip2/` |
@@ -5,6 +7,7 @@
 | 3 | 5 | Shap-E | TripoSR | `pair3_Shape_E_vs_TripoSR/` |
 | 4 | 11 | Qwen2.5-VL-3B | SmolVLM2-2.2B | `pair4_qwen25vl_vs_smolvlm2/` |
 
+## Folder Structure
 
 | Level 1 | Level 2 / File | Description |
 | :--- | :--- | :--- |
