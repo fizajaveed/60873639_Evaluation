@@ -5,29 +5,31 @@
 | 3 | 5 | Shap-E | TripoSR | `pair3_Shape_E_vs_TripoSR/` |
 | 4 | 11 | Qwen2.5-VL-3B | SmolVLM2-2.2B | `pair4_qwen25vl_vs_smolvlm2/` |
 
-## Folder structure
-├── 60873639_Report.pdf
-├── 60873639_Presentation.pptx
-├── README.md
-├── log.md                                  # dated development log and error fixes
-├── report_draft.md                         # working draft of the report (version history)
-├── pair1_datacomp_clip_vs_siglip2/
-│   ├── Pair1_DataComp_CLIP_vs_SigLIP2.ipynb
-│   ├── pair1_test_set.csv                  # answer key for the test photos
-│   ├── pair1_photos/
-│   └── pair1_results/
-├── pair2_CosXLEditing_vs_SDXLInpainting/
-│   ├── Pair2_CosXLEditing_vs_SDXLInpainting.ipynb
-│   ├── pair2_photos/                       # 10 Pexels test photos
-│   └── pair2_results/                      # masks, edits, misuse tests, tables
-├── pair3_Shape_E_vs_TripoSR/
-│   ├── Pair3_Shape_E_vs_TripoSR.ipynb
-│   ├── p3_photos/                          # 4 product photos
-│   └── p3_results/                         # tables, views grid, brand test, spins, meshes
-└── pair4_qwen25vl_vs_smolvlm2/
-    ├── Pair4_Qwen25VL_vs_SmolVLM2.ipynb
-    ├── p4_photos/                          # 40 products + p4_test_set.csv
-    └── p4_results/                         # answers, marked results, summary, charts
+
+| Level 1 | Level 2 / File | Description |
+| :--- | :--- | :--- |
+| `60873639_Report.pdf` | | Final written evaluation report |
+| `60873639_Presentation.pptx` | | Project presentation slides |
+| `README.md` | | Main repository index and project guide |
+| `log.md` | | Dated development log and error fixes |
+| `report_draft.md` | | Working draft of the report (version history) |
+| `pair1_datacomp_clip_vs_siglip2/` | | **Pair 1 Analysis Workspace** |
+| | `Pair1_DataComp_CLIP_vs_SigLIP2.ipynb` | Core evaluation notebook for CLIP vs SigLIP 2 |
+| | `pair1_test_set.csv` | Answer key for the test photos |
+| | `pair1_photos/` | Source images directory |
+| | `pair1_results/` | Evaluation outputs, metrics, and logs |
+| `pair2_CosXLEditing_vs_SDXLInpainting/` | | **Pair 2 Analysis Workspace** |
+| | `Pair2_CosXLEditing_vs_SDXLInpainting.ipynb` | Core evaluation notebook for CosXL vs SDXL |
+| | `pair2_photos/` | 10 Pexels test photos |
+| | `pair2_results/` | Masks, edits, misuse tests, and data tables |
+| `pair3_Shape_E_vs_TripoSR/` | | **Pair 3 Analysis Workspace** |
+| | `Pair3_Shape_E_vs_TripoSR.ipynb` | Core evaluation notebook for Shap-E vs TripoSR |
+| | `p3_photos/` | 4 product photos |
+| | `p3_results/` | Tables, views grid, brand test, spins, and meshes |
+| `pair4_qwen25vl_vs_smolvlm2/` | | **Pair 4 Analysis Workspace** |
+| | `Pair4_Qwen25VL_vs_SmolVLM2.ipynb` | Core evaluation notebook for Qwen2.5 vs SmolVLM2 |
+| | `p4_photos/` | 40 products + `p4_test_set.csv` |
+| | `p4_results/` | Answers, marked results, summary tables, and charts |
 
 ## How to reproduce
 1. Open a notebook in **Google Colab**.
