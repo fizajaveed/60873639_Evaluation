@@ -165,3 +165,7 @@ Pair 4 (Week 11): Qwen2.5-VL-3B vs SmolVLM2-2.2B
 
 ## Nov 3 - Nov 6
 Prepare report and slides
+
+
+## Nov 7
+recorded the video and editted it.
